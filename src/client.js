@@ -1,14 +1,34 @@
-import Phaser from 'phaser';
+// global styles
+require('./styles/global.less');
 
 // react
 import React, { Component } from 'react';
 import { render }           from 'react-dom';
 
-// const HelloWorld = () => {
-//     return (<div>Hello World</div>);
-// };
+// redux
+import { Provider }                     from 'react-redux';
+import { createStore, combineReducers } from 'redux';
 
-// render(
-//     <HelloWorld />, 
-//     document.getElementById('container')
-// );
+// container
+import ApplicationContainer from './containers/ApplicationContainer';
+
+// generate reducers
+// const reducers = combineReducers({
+    // ...
+// });
+
+// build store
+const store = createStore(
+    // reducers
+    () => {},
+    // dev tools
+    window.devToolsExtension ? window.devToolsExtension() : undefined
+);
+
+// render
+render(
+    <Provider store={store}>
+        <ApplicationContainer />
+    </Provider>,
+    document.getElementById('container')
+);

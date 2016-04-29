@@ -1,5 +1,4 @@
-dist/assets/*hot-update*.js
-dist/assets/*hot-update*.json
+dist/*hot-update*.js
+dist/*hot-update*.json
 node_modules
-dist
 .DS_Store

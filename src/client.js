@@ -12,15 +12,18 @@ import { createStore, combineReducers } from 'redux';
 // container
 import ApplicationContainer from './containers/ApplicationContainer';
 
+// reducers
+import applicationState from './reducers/applicationStateReducer';
+
 // generate reducers
-// const reducers = combineReducers({
-    // ...
-// });
+const reducers = combineReducers({
+    applicationState
+});
 
 // build store
 const store = createStore(
     // reducers
-    () => {},
+    reducers,
     // dev tools
     window.devToolsExtension ? window.devToolsExtension() : undefined
 );

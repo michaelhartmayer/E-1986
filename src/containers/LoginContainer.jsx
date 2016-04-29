@@ -1,20 +1,28 @@
 // dependencies
 import React, { Component } from 'react';
-import connect              from 'react-redux';
+import { connect }          from 'react-redux';
 
 // component
 class Login extends Component {
     render () {
-        return (<div></div>);
+        const { doLogin } = this.props;
+
+        return (
+            <div className='e-ux e-login-container full closed'>
+                <button onClick={() => doLogin()}>Login</button>
+            </div>
+        );
     }
 }
 
 // container
 const LoginContainer = connect(
     null,
-    null
+    dispatch => ({
+        doLogin: () => alert('login')
+    })
 )(Login);
 
 // exports
-export Login;
+export { Login };
 export default LoginContainer;

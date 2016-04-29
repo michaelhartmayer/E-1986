@@ -1,9 +1,11 @@
 const webpack   = require('webpack');
 const path      = require('path');
-const srcPath   = path.resolve(__dirname, 'src');
-const distPath  = path.resolve(__dirname, 'dist');
 const dm        = require('deep-merge/multiple');
 const args      = require('minimist')(process.argv.slice(2));
+
+// path
+const srcPath   = path.resolve(__dirname, 'src');
+const distPath  = path.resolve(__dirname, 'dist');
 
 // base config
 const webpackBaseConfig = {
@@ -15,13 +17,12 @@ const webpackBaseConfig = {
     },
 
     entry: {
-        'app': `${srcPath}/app.js`
+        'app': `${srcPath}/client.js`
     },
 
     output: {
-        path:       `${distPath}/assets`,
-        filename:   'ml.js',
-        publicPath: './assets/'
+        path:     distPath,
+        filename: 'client.js'
     },
 
     module: {
@@ -41,12 +42,12 @@ const webpackBaseConfig = {
             {
                 test: /\.(jpg|png|gif|bmp|tif)$/,
                 loader: 'file'
-            },
-            { 
-                test:    /\.(js|jsx)$/,
-                loader:  'react-hot!babel',
-                exclude: /node_modules/
             }
+            // { 
+            //     test:    /\.(js|jsx)$/,
+            //     loader:  'react-hot!babel',
+            //     exclude: /node_modules/
+            // }
         ]
     }
 };

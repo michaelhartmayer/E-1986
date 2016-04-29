@@ -42,12 +42,12 @@ const webpackBaseConfig = {
             {
                 test: /\.(jpg|png|gif|bmp|tif)$/,
                 loader: 'file'
+            },
+            {
+                test:    /\.(js|jsx)$/,
+                loader:  'react-hot!babel',
+                exclude: /node_modules/
             }
-            // { 
-            //     test:    /\.(js|jsx)$/,
-            //     loader:  'react-hot!babel',
-            //     exclude: /node_modules/
-            // }
         ]
     }
 };

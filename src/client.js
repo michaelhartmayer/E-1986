@@ -28,6 +28,8 @@ const store = createStore(
     window.devToolsExtension ? window.devToolsExtension() : undefined
 );
 
+var socket = io();
+
 // render
 render(
     <Provider store={store}>

@@ -49,12 +49,12 @@ class ConnectionManager {
         this.register(c);
 
         // log
-        log(`${c.bold} - Client Connected`);
+        log(`${id.bold} - Client Connected`);
     }
 
     handleDisconnect (c) {
         this.unregister(c);
-        log(`${c.bold} - Client Disconnected`);
+        log(`${c.getId().bold} - Client Disconnected`);
     }
 
     register (c) {
@@ -73,6 +73,10 @@ class Connection {
         this.sck = sck;
     }
 
+    onDisconnect (fn) {
+        this.sck.on('disconnect', () => fn(this));
+    }
+
     disconnect () {
         this.sck.close();
     }
@@ -83,6 +87,10 @@ class Connection {
 
     broadcast (channel, message) {
         this.sck.broadcast.emit(channel, message);
+    }
+
+    getId () {
+        return this.id;
     }
 }
 
@@ -123,23 +131,26 @@ server.listen(port, function () {
 });
 
 // routing
-app.get('*', (req, res) => {
-    var uri;
-    var file;
+app.use(express.static(__dirname));
+// app.get('*', (req, res) => {
+//     var uri;
+//     var file;
 
-    uri  = req.params[0];
-    file = path.join(__dirname, uri);
+//     console.log(req)
 
-    if (fs.existsSync(file) && fs.statSync(file).isFile()) {
-        res.sendFile(file);
-        log('http', '200'.white, uri);
-    }
+//     uri  = req.params[0];
+//     file = path.join(__dirname, uri);
 
-    else {
-        res.status(404).send('404 - Resource Not Found');
-        log('http', '404'.red, uri);
-    }
-});
+//     if (fs.existsSync(file) && fs.statSync(file).isFile()) {
+//         res.sendFile(file);
+//         log('http', '200'.white, uri);
+//     }
+
+//     else {
+//         res.status(404).send('404 - Resource Not Found');
+//         log('http', '404'.red, uri);
+//     }
+// });
 
 
 

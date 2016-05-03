@@ -13,7 +13,8 @@ log('-[ E-1986 ]-'.bold.yellow);
 
 // start webpack
 log('Starting Webpack'.bold.white);
-const webpack = spawn('webpack', ['--dev'], { stdio: 'inherit' });
+const webpack       = spawn('webpack', ['--dev'], { stdio: 'inherit' });
+const webpackServer = spawn('webpack', ['--dev', '--config',  'webpack.server.config.js'], { stdio: 'inherit' });
 
 // start server
 log('Starting Server [port: 9815]'.bold.white);
@@ -25,6 +26,7 @@ const browser = spawn('open', ['http://localhost:9815/']);
 
 // on error show error
 webpack.on('error', err => log('Unable to start Webpack.'.red));
+webpackServer.on('error', err => log('Unable to start Server Webpack.'.red));
 server.on('error',   err => log('Unable to start game Server'.red));
 browser.on('error', err => log('Unable to open http://localhost:9815'.red));
 
@@ -33,7 +35,7 @@ process.on('exit', function() {
     // log
     log('Killing ' + children.length + ' Child Processes.');
     
-    [webpack, server, browser].forEach(function (child) {
+    [webpack, webpackServer, server, browser].forEach(function (child) {
         child.kill();
     });
 });

@@ -6,6 +6,7 @@ import { connect }          from 'react-redux';
 
 // containers
 import LoginContainer from './LoginContainer';
+import StatusBarContainer from './StatusBarContainer';
 
 // component
 class Application extends Component {
@@ -13,6 +14,7 @@ class Application extends Component {
         return (
             <div className='e-ux e-application-container full closed'>
                 <LoginContainer />
+                <StatusBarContainer />
             </div>
         );
     }

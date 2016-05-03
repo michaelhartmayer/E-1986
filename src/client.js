@@ -15,6 +15,9 @@ import ApplicationContainer from './containers/ApplicationContainer';
 // reducers
 import applicationState from './reducers/applicationStateReducer';
 
+// actions
+import { serverConnected, serverDisconnected } from './actions/applicationStateActions';
+
 // generate reducers
 const reducers = combineReducers({
     applicationState
@@ -29,6 +32,8 @@ const store = createStore(
 );
 
 var socket = io();
+socket.on('connect', () => store.dispatch(serverConnected()));
+socket.on('disconnect', () => store.dispatch(serverDisconnected()));
 
 // render
 render(

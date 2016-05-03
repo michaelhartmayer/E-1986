@@ -33,7 +33,6 @@ class ConnectionManager {
         this.cActive = 0;
         this.cList   = [];
 
-
         if (!io) return error('Unable to start ConnectionManager - need io');
         
         io.on('connection', sck => this.handleConnect(sck));
@@ -132,25 +131,7 @@ server.listen(port, function () {
 
 // routing
 app.use(express.static(__dirname));
-// app.get('*', (req, res) => {
-//     var uri;
-//     var file;
 
-//     console.log(req)
-
-//     uri  = req.params[0];
-//     file = path.join(__dirname, uri);
-
-//     if (fs.existsSync(file) && fs.statSync(file).isFile()) {
-//         res.sendFile(file);
-//         log('http', '200'.white, uri);
-//     }
-
-//     else {
-//         res.status(404).send('404 - Resource Not Found');
-//         log('http', '404'.red, uri);
-//     }
-// });
 
 
 

@@ -20,7 +20,9 @@ class Application extends Component {
 
 // container
 const ApplicationContainer = connect(
-    null,
+    ({ applicationState }) => ({
+        isConnected: applicationState.connectedToServer
+    }),
     null
 )(Application);
 

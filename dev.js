@@ -17,7 +17,7 @@ const webpack = spawn('webpack', ['--dev'], { stdio: 'inherit' });
 
 // start server
 log('Starting Server [port: 9815]'.bold.white);
-const server = spawn('node', ['server.js'], { stdio: 'inherit' });
+const server = spawn('nodemon', ['./dist/server.js'], { stdio: 'inherit' });
 
 // start browser
 log('Opening in Browser'.bold.white + ' http://localhost:9815'.bold.yellow);

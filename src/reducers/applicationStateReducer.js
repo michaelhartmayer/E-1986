@@ -9,9 +9,9 @@ const defaults = {
 const applicationStateReducer = (state = defaults, action = {}) => {
     switch (action.type) {
         case 'SERVER_CONNECTED':
-            return Object.assign({}, { connectedToServer: true });
+            return Object.assign({}, state, { connectedToServer: true });
         case 'SERVER_DISCONNECTED':
-            return Object.assign({}, { connectedToServer: false });
+            return Object.assign({}, state, { connectedToServer: false });
         default:
             return state;
     }

@@ -27,7 +27,6 @@
     "babel-preset-react": "^6.5.0",
     "classnames": "^2.2.3",
     "express": "^4.13.4",
-    "griddle-react": "^0.4.1",
     "mediator-js": "^0.9.9",
     "moment": "^2.12.0",
     "phaser": "^2.4.7",

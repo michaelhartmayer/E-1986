@@ -15,8 +15,8 @@ class Application extends Component {
     render () {
         return (
             <div className='e-ux e-application-container full closed'>
+                <StatusBarContainer />
                 {/*
-                    <StatusBarContainer />
                     <Scrim>
                         <Modal>Hello!</Modal>
                     </Scrim>

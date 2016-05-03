@@ -1,14 +1,13 @@
-// Setup basic express server
+require('colors');
+
+// express server
 var express = require('express');
 var app     = express();
 var server  = require('http').createServer(app);
 var io      = require('socket.io')(server);
 var port    = process.env.PORT || 9815;
 
-// Routing
-app.use(express.static(__dirname + '/dist'));
-
-/* DEV */
+// dev users
 const users = {
     'Pawn':     'test',
     'Knight':   'test',
@@ -20,10 +19,47 @@ const users = {
     'Master':   '12345'
 };
 
+// log helpers
+const log   = (...args) => console.log.apply(null, ['->'.bold.white, ...args]);
+const error = (...args) => console.log.apply(null, ['-E'.bold.red, ...args]);
+
 // connection manager
 class ConnectionManager {
-    constructor ({ limit = 20 }) {
+    constructor ({ io = null, limit = 20 }) {
+        this.cLimit  = limit;
+        this.cActive = 0;
+        this.cList   = [];
 
+
+        if (!io) return error('Unable to start ConnectionManager - need io');
+        
+        io.on('connection', sck => this.handleConnect(sck));
+        log('ConnectionManager started.');
+    }
+
+    handleConnect (sck) {
+        const c      = new Connection(sck);
+        const { id } = sck;
+
+        // bind disconnect
+        c.onDisconnect(c => this.handleDisconnect(c));
+        this.register(c);
+
+        // log
+        log(`${c.bold} - Client Connected`);
+    }
+
+    handleDisconnect (c) {
+        this.unregister(c);
+        log(`${c.bold} - Client Disconnected`);
+    }
+
+    register (c) {
+        this.cList.push(c);
+    }
+
+    unregister (c) {
+        this.cList = this.cList.filter(i => c === i ? false : i);
     }
 }
 
@@ -40,6 +76,10 @@ class Connection {
 
     emit (channel, message) {
         this.sck.emit(channel, message);
+    }
+
+    broadcast (channel, message) {
+        this.sck.broadcast.emit(channel, message);
     }
 }
 
@@ -64,6 +104,8 @@ class UserSession {
     }
 }
 
+new ConnectionManager({ io });
+
 // login
 const login = credentials => {
     const { username, password } = credentials;
@@ -74,5 +116,8 @@ const login = credentials => {
 
 // http listen
 server.listen(port, function () {
-    console.log('Server listening at port %d', port);
+    log(`http server listening at port ${port.toString().bold}`);
 });
+
+// routing
+app.use(express.static(__dirname));

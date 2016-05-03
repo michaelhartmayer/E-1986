@@ -32,9 +32,6 @@ browser.on('error', err => log('Unable to open http://localhost:9815'.red));
 
 // kill processes on exit
 process.on('exit', function() {
-    // log
-    log('Killing ' + children.length + ' Child Processes.');
-    
     [webpack, webpackServer, server, browser].forEach(function (child) {
         child.kill();
     });

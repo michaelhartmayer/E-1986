@@ -3,6 +3,17 @@ const path      = require('path');
 const dm        = require('deep-merge/multiple');
 const args      = require('minimist')(process.argv.slice(2));
 
+// server-side webpack
+var fs          = require('fs');
+var nodeModules = {};
+fs.readdirSync('node_modules')
+    .filter(function(x) {
+        return ['.bin'].indexOf(x) === -1;
+    })
+    .forEach(function(mod) {
+        nodeModules[mod] = 'commonjs ' + mod;
+    });
+
 // path
 const srcPath   = path.resolve(__dirname, 'src');
 const distPath  = path.resolve(__dirname, 'dist');
@@ -12,13 +23,18 @@ const webpackBaseConfig = {
     root:               `${srcPath}`,
     moduleDirectories:  ['node_modules'],
 
+    externals: nodeModules,
+    context:   distPath,
+
     resolve: {
         extensions: ['', '.js', '.jsx']
     },
 
     entry: {
-        'client': `${srcPath}/client.js`
+        'server': `${srcPath}/server.js`
     },
+
+    target: 'node',
 
     output: {
         path:     distPath,
@@ -49,7 +65,13 @@ const webpackBaseConfig = {
                 exclude: /node_modules/
             }
         ]
-    }
+    },
+
+    plugins: [
+        new webpack.DefinePlugin({
+            __dirname: '"' + distPath + '"'
+        }),
+    ]
 };
 
 // env config

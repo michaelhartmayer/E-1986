@@ -1,11 +1,14 @@
 require('colors');
 
+const path = require('path');
+const fs   = require('fs');
+
 // express server
-var express = require('express');
-var app     = express();
-var server  = require('http').createServer(app);
-var io      = require('socket.io')(server);
-var port    = process.env.PORT || 9815;
+const express = require('express');
+const app     = express();
+const server  = require('http').createServer(app);
+const io      = require('socket.io')(server);
+const port    = process.env.PORT || 9815;
 
 // dev users
 const users = {
@@ -120,4 +123,25 @@ server.listen(port, function () {
 });
 
 // routing
-app.use(express.static(__dirname));
+app.get('*', (req, res) => {
+    var uri;
+    var file;
+
+    uri  = req.params[0];
+    file = path.join(__dirname, uri);
+
+    if (fs.existsSync(file) && fs.statSync(file).isFile()) {
+        res.sendFile(file);
+        log('http', '200'.white, uri);
+    }
+
+    else {
+        res.status(404).send('404 - Resource Not Found');
+        log('http', '404'.red, uri);
+    }
+});
+
+
+
+
+

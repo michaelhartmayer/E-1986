@@ -7,6 +7,8 @@ import { connect }          from 'react-redux';
 // containers
 import LoginContainer from './LoginContainer';
 import StatusBarContainer from './StatusBarContainer';
+
+// components
 import Modal from '../components/Modal';
 import Scrim from '../components/Scrim';
 
@@ -16,6 +18,7 @@ class Application extends Component {
         return (
             <div className='e-ux e-application-container full closed'>
                 <StatusBarContainer />
+                <LoginContainer />
                 {/*
                     <Scrim>
                         <Modal>Hello!</Modal>

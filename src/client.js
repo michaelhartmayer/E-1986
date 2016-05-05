@@ -1,22 +1,24 @@
 // global styles
 require('./styles/global.less');
 
-// react
-import React, { Component } from 'react';
-import { render }           from 'react-dom';
-
-// redux
+// dependencies: react / redux
+import React, { Component }             from 'react';
+import { render }                       from 'react-dom';
 import { Provider }                     from 'react-redux';
 import { createStore, combineReducers } from 'redux';
+
+// sandbox
+import sandbox from './client.sandbox';
+
+// services
+import OnlineService from './services/OnlineService';
+import LoginService  from './services/LoginService';
 
 // container
 import ApplicationContainer from './containers/ApplicationContainer';
 
 // reducers
 import applicationState from './reducers/applicationStateReducer';
-
-// actions
-import { serverConnected, serverDisconnected } from './actions/applicationStateActions';
 
 // generate reducers
 const reducers = combineReducers({
@@ -31,14 +33,20 @@ const store = createStore(
     window.devToolsExtension ? window.devToolsExtension() : undefined
 );
 
+// generator socket
 var socket = io();
-socket.on('connect', () => store.dispatch(serverConnected()));
-socket.on('disconnect', () => store.dispatch(serverDisconnected()));
+
+// build sandbox
+const sb = sandbox({ store, io, socket });
+
+// start services
+new OnlineService(sb);
+new LoginService(sb);
 
 // render
 render(
     <Provider store={store}>
-        <ApplicationContainer />
+        <ApplicationContainer sandbox={sb} />
     </Provider>,
     document.getElementById('container')
 );

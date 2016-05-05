@@ -14,11 +14,18 @@ import Scrim from '../components/Scrim';
 
 // component
 class Application extends Component {
+    handleLogin (credentials) {
+        const sb = this.props.sandbox;
+        sb.mediator.publish('ON_LOGIN', credentials);
+    }
+
     render () {
+        const sb = this.props.sandbox
+
         return (
             <div className='e-ux e-application-container full closed'>
                 <StatusBarContainer />
-                <LoginContainer />
+                <LoginContainer onLogin={ credentials => this.handleLogin(credentials) } />
                 {/*
                     <Scrim>
                         <Modal>Hello!</Modal>
@@ -28,6 +35,11 @@ class Application extends Component {
         );
     }
 }
+
+// defaults
+Application.defaultProps = {
+    sandbox: null
+};
 
 // container
 const ApplicationContainer = connect(

@@ -1,5 +1,5 @@
 // global styles
-require('./styles/global.less');
+require('./client/styles/global.less');
 
 // dependencies: react / redux
 import React, { Component }             from 'react';
@@ -8,17 +8,17 @@ import { Provider }                     from 'react-redux';
 import { createStore, combineReducers } from 'redux';
 
 // sandbox
-import sandbox from './client.sandbox';
+import sandbox from './client/client.sandbox';
 
 // services
-import OnlineService from './services/OnlineService';
-import LoginService  from './services/LoginService';
+import OnlineService from './client/services/OnlineService';
+import LoginService  from './client/services/LoginService';
 
 // container
-import ApplicationContainer from './containers/ApplicationContainer';
+import ApplicationContainer from './client/containers/ApplicationContainer';
 
 // reducers
-import applicationState from './reducers/applicationStateReducer';
+import applicationState from './client/reducers/applicationStateReducer';
 
 // generate reducers
 const reducers = combineReducers({

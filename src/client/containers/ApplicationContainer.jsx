@@ -20,7 +20,7 @@ class Application extends Component {
     }
 
     render () {
-        const sb = this.props.sandbox
+        const sb = this.props.sandbox;
 
         return (
             <div className='e-ux e-application-container full closed'>

@@ -28,7 +28,7 @@ class TextField extends Component {
             </div>
         );
     }
-};
+}
 
 TextField.defaultProps = {
     placeholder: '',

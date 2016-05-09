@@ -31,5 +31,8 @@
     "no-alert": 1,
     "react/jsx-uses-react": 1,
     "react/jsx-uses-vars": 1
+  },
+  "globals": {
+    "io": true
   }
 }

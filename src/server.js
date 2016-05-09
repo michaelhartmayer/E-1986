@@ -10,17 +10,8 @@ const server  = require('http').createServer(app);
 const io      = require('socket.io')(server);
 const port    = process.env.PORT || 9815;
 
-// dev users
-const users = {
-    'Pawn':     'test',
-    'Knight':   'test',
-    'Rook':     'test',
-    'King':     'test',
-    'Queen':    'test',
-    'Bishop':   'test',
-    'Joker':    'test',
-    'Master':   '12345'
-};
+// microservices
+import 
 
 // log helpers
 const log   = (...args) => console.log.apply(null, ['->'.bold.white, ...args]);

@@ -19,7 +19,7 @@ class IOMicroservice {
 
     // unregister a connection
     unregister (c) {
-        this.connections.filter(i => i === c ? false : i);
+        this.connections = this.connections.filter(i => i === c ? false : i);
     }
 
     // listen for incoming connections
@@ -49,7 +49,7 @@ class IOMicroservice {
 
     // handle action from a connection
     handleOnConnectionAction (c, action) {
-        const { type, ...o } = action;
+        const { type, ...payload } = action;
 
         switch (type) {
             case 'IDENT':
@@ -60,7 +60,7 @@ class IOMicroservice {
         }
     }
 
-    handleIdentAction (c, o) {
+    handleIdentAction (c, payload) {
     }
 }
 

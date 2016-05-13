@@ -5,13 +5,17 @@ require('./Scrim.less');
 import React from 'react';
 
 // component
-const Scrim = ({ children, opacity = 0.8 }) => {
+const Scrim = ({ children, opacity }) => {
     return (
         <div className='e-ux e-scrim full closed'>
             <div className='e-ux full closed overlay' style={{opacity}}></div>
             {children}
         </div>
     );
+};
+
+Scrim.defaultProps = {
+    opacity: 0.8
 };
 
 // exports

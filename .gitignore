@@ -2,3 +2,4 @@ dist/*hot-update*.js
 dist/*hot-update*.json
 node_modules
 .DS_Store
+npm-debug.log

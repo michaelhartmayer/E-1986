@@ -20,6 +20,9 @@ import ApplicationContainer from './client/containers/ApplicationContainer';
 // reducers
 import applicationState from './client/reducers/applicationStateReducer';
 
+// dev: actions
+import { setApplicationStatus } from './client/actions/applicationStateActions';
+
 // generate reducers
 const reducers = combineReducers({
     applicationState
@@ -50,3 +53,5 @@ render(
     </Provider>,
     document.getElementById('container')
 );
+
+setTimeout(() => store.dispatch(setApplicationStatus()), 1000);

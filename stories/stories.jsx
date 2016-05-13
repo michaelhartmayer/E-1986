@@ -1,13 +1,14 @@
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
 
-// // components
-// import Modal        from '../src/components/Modal.jsx';
-// import TextButton   from '../src/components/TextButton.jsx';
+// components
 import Scrim from '../src/client/components/Scrim.jsx';
 
+// containers
+import SplashContainer from '../src/client/containers/SplashContainer.jsx';
+
 /* Component: <Scrim /> */
-storiesOf('Scrim', module)
+storiesOf('<Scrim />', module)
     .add('Default', () => (
         <Scrim />
     ))
@@ -21,11 +22,5 @@ storiesOf('Scrim', module)
         <Scrim opacity={0.1} />
     ));
 
-/* Component: <TextButton /> */
-// storiesOf('TextButton', module)
-//     .add('Default', () => (
-//         <TextButton />
-//     ))
-//     .add('With Text', () => (
-//         <TextButton>Test</TextButton>
-//     ));
+/* Container: <SplashContainer /> */
+// x

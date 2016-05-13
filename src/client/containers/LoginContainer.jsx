@@ -25,11 +25,13 @@ class Login extends Component {
     render () {
         return (
             <Container classes='e-login-container full closed'>
-                <Modal>
+                <Modal height={200}>
+                    <h1>Login to get Rekt</h1>
+
                     <TextField placeholder='Username' ref='cmpUsername' />
                     <TextField type='password' ref='cmpPassword' />
 
-                    <button onClick={ () => this.handleLogin() }>Login</button>
+                    <button onClick={() => this.handleLogin()}>Login</button>
                 </Modal>
             </Container>
         );

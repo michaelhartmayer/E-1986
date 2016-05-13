@@ -29,7 +29,7 @@ class Application extends Component {
             case 'LOADING': 
                 screen = (
                     <SplashContainer />
-                )
+                );
                 break;
             case 'READY_TO_LOGIN':
                 screen = (
@@ -37,7 +37,7 @@ class Application extends Component {
                         <StatusBarContainer />
                         <LoginContainer onLogin={ credentials => this.handleLogin(credentials) } />
                     </div>
-                )
+                );
                 break;
         }
 

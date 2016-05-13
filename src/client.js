@@ -54,4 +54,5 @@ render(
     document.getElementById('container')
 );
 
+// dev: close splash screen
 setTimeout(() => store.dispatch(setApplicationStatus()), 1000);
